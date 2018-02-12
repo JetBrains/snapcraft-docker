@@ -9,15 +9,19 @@ like `--dns=8.8.8.8` added to the command.
 
 ## Creating containers
 
-Note that in the following commands, `--network host` is not strictly needed
-if a proper docker bridge is setup.
+There are four separate Dockerfiles here, each one corresponding to their
+respective risk level:
 
-### snapcraft snap on edge
+- **edge.Dockerfile**: Using the snap from edge
+- **beta.Dockerfile**: Using the snap from beta
+- **candidate.Dockerfile**: Using the snap from candidate
+- **stable.Dockerfile**: Using the snap from stable
 
-    docker build --no-cache -f snap-edge.Dockerfile --label snapcore/snapcraft --tag snapcore/snapcraft:edge --network host .
-    docker push snapcore/snapcraft:edge
+Build the docker image with the following (note that `--network host` is not
+strictly needed if a proper docker bridge is setup):
 
-### snapcraft snap on beta
+    docker build --no-cache -f <risk>.Dockerfile --label snapcore/snapcraft --tag snapcore/snapcraft:<risk> --network host .
 
-    docker build --no-cache -f snap-beta.Dockerfile --label snapcore/snapcraft --tag snapcore/snapcraft:beta --network host .
-    docker push snapcore/snapcraft:beta
+You can push that image with:
+
+    docker push snapcore/snapcraft:<risk>
