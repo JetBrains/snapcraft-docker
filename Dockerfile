@@ -13,8 +13,8 @@ RUN apt-get update && apt-get -y dist-upgrade && apt-get -y install \
       squashfs-tools
 
 # Download and unpack snap bases and snapcraft as a snap
-COPY --chmod=755 prepare.sh .
-RUN ./prepare.sh
+COPY prepare.sh .
+RUN chmod 755 prepare.sh && ./prepare.sh
 
 # Fix Python3 installation: Make sure we use the interpreter from
 # the snapcraft snap:
