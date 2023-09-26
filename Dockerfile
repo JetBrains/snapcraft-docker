@@ -1,5 +1,5 @@
 ARG RISK=stable
-ARG UBUNTU=22.04
+ARG UBUNTU=jammy
 
 FROM ubuntu:$UBUNTU as builder
 ARG RISK
