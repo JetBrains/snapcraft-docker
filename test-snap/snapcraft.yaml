@@ -1,0 +1,25 @@
+name: simple
+version: '2023.3'
+summary: |-
+  Simple summary
+description: |-
+  Some description
+grade: devel
+confinement: classic
+base: core22
+compression: lzo
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: amd64
+  - build-on: [amd64, arm64]
+    build-for: arm64
+
+apps:
+  intellij-idea-community:
+    command: bin/simple.sh
+
+parts:
+  common:
+    plugin: dump
+    source: dist.all
+    build-attributes: [no-patchelf]
