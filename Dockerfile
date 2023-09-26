@@ -55,3 +55,4 @@ ENV PATH="/snap/bin:/snap/snapcraft/current/usr/bin:$PATH"
 ENV SNAP="/snap/snapcraft/current"
 ENV SNAP_NAME="snapcraft"
 ENV SNAP_ARCH="amd64"
+ENV SNAPCRAFT_BUILD_ENVIRONMENT=host
