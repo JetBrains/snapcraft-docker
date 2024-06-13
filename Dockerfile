@@ -22,13 +22,6 @@ RUN unlink /snap/snapcraft/current/usr/bin/python3
 RUN ln -s /snap/snapcraft/current/usr/bin/python3.* /snap/snapcraft/current/usr/bin/python3
 RUN echo /snap/snapcraft/current/lib/python3.*/site-packages >> /snap/snapcraft/current/usr/lib/python3/dist-packages/site-packages.pth
 
-# Create a snapcraft runner (TODO: move version detection to the core of
-# snapcraft).
-RUN mkdir -p /snap/bin
-RUN echo "#!/bin/sh" > /snap/bin/snapcraft
-RUN snap_version="$(awk '/^version:/{print $2}' /snap/snapcraft/current/meta/snap.yaml | tr -d \')" && echo "export SNAP_VERSION=\"$snap_version\"" >> /snap/bin/snapcraft
-RUN echo 'exec "$SNAP/usr/bin/python3" "$SNAP/bin/snapcraft" "$@"' >> /snap/bin/snapcraft
-RUN chmod +x /snap/bin/snapcraft
 
 # Multi-stage build, only need the snaps from the builder. Copy them one at a
 # time so they can be cached.
@@ -54,5 +47,4 @@ ENV LC_ALL="en_US.UTF-8"
 ENV PATH="/snap/bin:/snap/snapcraft/current/usr/bin:$PATH"
 ENV SNAP="/snap/snapcraft/current"
 ENV SNAP_NAME="snapcraft"
-ENV SNAP_ARCH="amd64"
 ENV SNAPCRAFT_BUILD_ENVIRONMENT=host
