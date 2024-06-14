@@ -1,5 +1,7 @@
 #!/bin/bash
-set -euxo pipefail
+set -euo pipefail
+
+TAG="${1:-jetbrains/snapcraft}"
 
 cd "$(dirname "$0")"
 
@@ -13,7 +15,7 @@ for arch in "amd64" "arm64"; do
     --volume="$PWD/dist.all:/build/dist.all:ro" \
     --volume="$PWD/log:/root/.local/state/snapcraft/log" \
     --workdir=/build \
-    "$1" \
+    "$TAG" \
     snapcraft snap "--build-for=$arch" -o "result/simple_$arch.snap"
 
     rm -rf "result/unpacked/$arch"
